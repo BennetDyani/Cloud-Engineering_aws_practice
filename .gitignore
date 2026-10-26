@@ -1,0 +1,32 @@
+# Terraform
+.terraform/     # provider plugins downloaded by init (generated, large)
+*.tfstate       # local state file that may contain secrets, maps your infrastructure to your configuration (sensitive, set by "terraform apply")
+*.tfstate.*     # state backups: same risk
+*.tfplan        # saved plans can contain secret values
+*.tfvars        # variables file, may contain sensitive data
+*.tfvars.json   
+!example.tfvars  # "!" = eXEPTION: a safe template showing which variables existr
+crash.log       # Terraform crash logs/dumps are usually very large and contain sensitive data
+override.tf      # local override of resources, for development only and not meant to be shared
+override.tf.json # same as above, but in JSON format
+*_override.tf      # same as above, but with a name
+*_override.tf.json # same as above, but with a name and in JSON format
+
+
+# Secrets and Creditials
+.env
+.env.*
+!.env.example   # "!" = eXEPTION: a safe template showing which variables exist
+*.pem       # private key files/certifgicates
+*.key
+*accessKeys*.csv  # access keys from AWS, GCP, etc. (sensitive)
+
+# Generated app files 
+node_modules/  # npm packages (generated, large)
+dist/          # build output (generated, large)
+
+# Machine / editor
+Thumbs.db
+desktop.ini
+.vscode/
+
