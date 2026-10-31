@@ -72,6 +72,11 @@ b. With -out: you sign a quote list ing exactly which parts get replaced.
 
 
 4. What do you think the 4 terraform files are for snd should they go to Git?
-# These files are the infrastructure of my configurations. They should not go to Git because they may contail secrets.
+# These files are the infrastructure of my configurations. 
+# .terraform/: the downloaded provider (AWS translator),  not supposed to go to Git.
+# .terraform.lock.hcl: a record of exactly which provider version was used, so that everyone gets the same one.
+# terraform.tfstate: Terrafor's mermory of what exists in AWS.  Can contain secrets.
+# terraform.tfstate.backup: The previous version of that memory, from before the last change. Can have secrets.
+
 
 

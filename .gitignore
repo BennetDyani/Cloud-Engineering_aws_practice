@@ -6,7 +6,8 @@
  # state backups: same risk
 *.tfstate.*        
 # saved plans can contain secret values
-*.tfplan           
+*.tfplan    
+tfplan       
 # variables file, may contain sensitive data
 *.tfvars           
 *.tfvars.json   
