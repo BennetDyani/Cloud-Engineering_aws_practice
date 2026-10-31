@@ -80,3 +80,29 @@ b. With -out: you sign a quote list ing exactly which parts get replaced.
 
 
 
+# MAKING RESOURCES WORK TOGETHER
+
+1. So far i only created one thing on its own, but real infrastructure is made up of connected things: a user belongs to a group, a server sits in a network, a load balancer sends trafdfic to a server.
+
+In oprder to connect them together, one resource should *refer to another* using the following pattern.
+* TYPE.LOCAL_NAME.ATTRIBUTE
+ aws_iam_group.developers.name
+ Read it as: "the group I nicknamed developers -> give me this name"
+
+ * One source of truth: if I rename the group later, every reference updates automatically.
+ * Terraform works out the order for you. When resource B reference resource A, Terraform knows that A must be created first. 
+You never have to tell it the order. And on destroy, it revereses the order automatically. B is removed before A.
+* This is called an implicit dependancy; "Implicit" because you never wrote "do A before B", the reference implied it.
+
+# 1. A user
+resource "aws_iam_user" "___" {        # choose a local name
+  name = "test-dev"
+}
+
+# 2. Put that user into the group
+resource "aws_iam_user_group_membership" "___" {   # choose a local name
+  user   = ___     # refer to the user's name, using TYPE.LOCAL_NAME.ATTRIBUTE
+  groups = [___]   # a list containing the group's name, using a reference, not plain text
+}
+
+2. Teams split files by topic once a project grows (network.ts, iam.tf, outputs.tf) so that people can know where to find things. 
